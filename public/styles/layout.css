@@ -37,3 +37,45 @@ main {
   color: red;
   font-weight: bold;
 }
+
+.tweet {
+  margin-top: 25px;
+  border: 3px solid black;
+  margin: 10px;
+  padding: 10px;
+  transition: box-shadow 0.3s;
+}
+
+.bottom-icons i {
+  color: blue;
+}
+
+/* Icons hover */
+.bottom-icons i:hover {
+  color: #ffdb58;
+}
+
+/* boxshadow on icons hover */
+.tweet:hover {
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+}
+
+.containers {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+}
+
+.bottom-container {
+  border-top: 3px solid black;
+  margin-top: 25px;
+  font-size: 18px;
+}
+
+.bottom-container span {
+  margin-top: 10px;
+}
+
+.bottom-container div {
+  margin-top: 10px;
+}

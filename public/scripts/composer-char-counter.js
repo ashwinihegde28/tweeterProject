@@ -1,4 +1,5 @@
 $(document).ready(function () {
+  //$(this).next().find('.counter') -- other way to serch the id, just for reference
   const counter = $(".counter");
   $("#tweet-text").on("input", function (event) {
     const count = $(this).val().length;
