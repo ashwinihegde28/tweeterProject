@@ -1,0 +1,28 @@
+nav{
+    height: 120px;
+        width: 100vw;
+        background-color: #4056A1;
+        color: #FFFFFF;
+        padding: 0 1.5em;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;       
+
+}
+
+nav span {
+    font-family: Bungee, sans-serif;
+}
+
+.WrtLink{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    font-style: normal;
+    font-family: sans-serif;
+    
+}
+nav i{
+    color:red;
+    font-weight: bold;
+}
