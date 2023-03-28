@@ -1,13 +1,16 @@
-.header{
-    margin-top: 70px;
-height :400px;
-width :100%;
-background-color: orange;
-/* background-color: #f5c800; */
-    background-image: url("https://www.transparenttextures.com/patterns/brick-wall.png");
-display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: end;
-    padding-top: 180px;
+.header {
+  /* margin-top: 70px; */
+  height: 520px;
+  width: 100%;
+  background-color: orange;
+  background-image: url("https://www.transparenttextures.com/patterns/brick-wall.png");
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding-top: 120px;
+}
+
+.header__name {
+  margin: 0;
 }

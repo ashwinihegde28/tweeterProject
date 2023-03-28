@@ -1,0 +1,33 @@
+.new-tweet {
+  width: 100%;
+}
+
+form {
+  /* width: 100%; */
+}
+
+.new-tweet__footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 1em;
+  font-family: Bungee, cursive;
+}
+
+.new-tweet__line {
+  height: 2px;
+  background-color: black;
+}
+
+.new-tweet__footer button {
+  background-color: blue;
+  color: white;
+}
+
+#tweet-text {
+  width: 100%;
+  background: transparent;
+  resize: none;
+  border: none;
+  margin-top: 1em;
+}
