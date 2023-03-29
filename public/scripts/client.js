@@ -70,5 +70,19 @@ $(document).ready(() => {
     return $tweet;
   };
 
-  console.log(renderTweets(data));
+  renderTweets(data);
+
+  // handling new tweet form submit
+  $("form").submit(function (event) {
+    event.preventDefault();
+    const dataObj = {
+      text: $(this).find("textarea").val(),
+    };
+    $.ajax({
+      method: "Post",
+      url: "/tweets",
+      type: "application/json",
+      data: dataObj,
+    });
+  });
 });
