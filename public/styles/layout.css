@@ -89,3 +89,8 @@ main {
   height: 40px;
   width: 40px;
 }
+
+.tweet-error-section {
+  color: red;
+  font-size: 15px;
+}

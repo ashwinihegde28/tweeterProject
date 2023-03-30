@@ -7,32 +7,12 @@
 // Test / driver code (temporary). Eventually will get this from the server.
 
 // Fake data taken from initial-tweets.json
-const data = [
-  {
-    user: {
-      name: "Newton",
-      avatars: "https://i.imgur.com/73hZDYK.png",
-      handle: "@SirIsaac",
-    },
-    content: {
-      text: "If I have seen further it is by standing on the shoulders of giants",
-    },
-    created_at: 1461116232227,
-  },
-  {
-    user: {
-      name: "Descartes",
-      avatars: "https://i.imgur.com/nlhLi3I.png",
-      handle: "@rd",
-    },
-    content: {
-      text: "Je pense , donc je suis",
-    },
-    created_at: 1461113959088,
-  },
-];
-
 $(document).ready(() => {
+  //onload of the form hide the error segment
+  $(".tweet-error-section").hide();
+
+  const $errorMessage = $(".error-message");
+
   const renderTweets = function (tweets) {
     // loops through tweets (array of objects)
     for (tweet of tweets) {
@@ -58,7 +38,7 @@ $(document).ready(() => {
       <p class="tweet-description">${tweet.content.text}
       </p>
       <footer class="bottom-container containers">
-        <span>${tweet.created_at}</span>
+        <span>${timeago.format(tweet.created_at)}</span>
         <div class="bottom-icons fa-sharp fa-solid">
           <i class=" fa-flag"></i>
           <i class="fa-retweet"></i>
@@ -70,14 +50,29 @@ $(document).ready(() => {
     return $tweet;
   };
 
-  renderTweets(data);
-
   // handling new tweet form submit
   $("form").submit(function (event) {
+    // On click of submit button prevent page refreshing
+    event.preventDefault();
+    $(".tweet-error-section").hide();
+    inputText = $("#tweet-text").val();
+
+    if (!inputText) {
+      $(".tweet-error-section").show();
+      $(".tweet-error").text("Tweet cannot be empty!");
+    }
+
+    //input characters must cannot exceed 140
+    if (inputText.length > 140) {
+      $(".tweet-error-section").show();
+      $(".tweet-error").text("Tweet cannot exceed 140 characters!");
+    }
+
     event.preventDefault();
     const dataObj = {
       text: $(this).find("textarea").val(),
     };
+    // method = post
     $.ajax({
       method: "Post",
       url: "/tweets",
@@ -85,4 +80,18 @@ $(document).ready(() => {
       data: dataObj,
     });
   });
+  // client-side JavaScript will use AJAX to fetch (GET) data from the server
+  const loadTweets = function () {
+    $.ajax({
+      method: "Get",
+      url: "http://localhost:8080/tweets",
+      type: "application/json",
+      success: renderTweets,
+      error: (jqXHR, textStatus, errorThrown) => {
+        console.log("Error =>", { jqXHR, textStatus, errorThrown });
+      },
+    });
+  };
+
+  loadTweets();
 });

@@ -32,6 +32,12 @@
 
     <!-- External JS -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script
+      src="https://cdnjs.cloudflare.com/ajax/libs/timeago.js/4.0.2/timeago.min.js"
+      integrity="sha512-SVDh1zH5N9ChofSlNAK43lcNS7lWze6DTVx1JCXH1Tmno+0/1jMpdbR8YDgDUfcUrPp1xyE53G42GFrcM0CMVg=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    ></script>
 
     <!-- App JS -->
     <script type="text/javascript" src="/scripts/client.js"></script>
@@ -71,6 +77,11 @@
             id="tweet-text"
             placeholder="What are you humming about ?"
           ></textarea>
+          <!-- Display error msg if required, by default hide it -->
+          <h4 class="tweet-error-section">
+            <i class="fas fa-exclamation-circle"></i>
+            <span class="tweet-error">Error message goes here</span>
+          </h4>
           <div class="new-tweet__line"></div>
           <div class="new-tweet__footer">
             <button class="new-tweet__button" type="submit">Tweet</button>
