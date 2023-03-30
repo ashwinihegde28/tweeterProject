@@ -72,16 +72,17 @@
     <main class="container">
       <section class="new-tweet">
         <form action="/tweets" method="post">
-          <textarea
-            name="text"
-            id="tweet-text"
-            placeholder="What are you humming about ?"
-          ></textarea>
           <!-- Display error msg if required, by default hide it -->
           <h4 class="tweet-error-section">
             <i class="fas fa-exclamation-circle"></i>
             <span class="tweet-error">Error message goes here</span>
           </h4>
+          <textarea
+            name="text"
+            id="tweet-text"
+            placeholder="What are you humming about ?"
+          ></textarea>
+
           <div class="new-tweet__line"></div>
           <div class="new-tweet__footer">
             <button class="new-tweet__button" type="submit">Tweet</button>

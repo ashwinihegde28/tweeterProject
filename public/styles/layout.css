@@ -92,5 +92,11 @@ main {
 
 .tweet-error-section {
   color: red;
-  font-size: 15px;
+  font-size: 25px;
+  border: 5px solid red;
+  text-align: center;
 }
+
+/* #tweet-text:hover ~ .tweet-error-section {
+  visibility: hidden;
+} */
