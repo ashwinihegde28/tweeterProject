@@ -24,7 +24,7 @@ $(document).ready(() => {
       return;
     }
 
-    //input characters must cannot exceed 140
+    //input characters cannot exceed 140
     if (inputText.length > 140) {
       $(".tweet-error").text("Tweet cannot exceed 140 characters!");
       $(".tweet-error-section").slideDown();
@@ -33,8 +33,7 @@ $(document).ready(() => {
       return;
     }
 
-    //event.preventDefault();
-    // method = post
+    
     $.ajax({
       method: "Post",
       url: "/tweets",
@@ -66,8 +65,6 @@ const renderTweets = function (tweets) {
     // calls createTweetElement for each tweet and append it to teetContainer and return it
     $("#tweet-section").prepend(createTweetElement(tweet));
   }
-
-  // takes return value and appends it to the tweets container
   return;
 };
 
