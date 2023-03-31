@@ -2,10 +2,6 @@
   width: 100%;
 }
 
-form {
-  /* width: 100%; */
-}
-
 .new-tweet__footer {
   display: flex;
   justify-content: space-between;
