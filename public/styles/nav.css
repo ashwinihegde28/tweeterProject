@@ -17,8 +17,7 @@ nav {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  position: fixed;
-  /* margin-bottom: 20px; */
+  position: fixed;  
 }
 
 nav span {
