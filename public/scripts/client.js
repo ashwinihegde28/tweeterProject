@@ -4,70 +4,17 @@
  * Reminder: Use (and do all your DOM work in) jQuery's document ready function
  */
 
-// Fake data taken from initial-tweets.json
-$(document).ready(() => {
-  //onload of the form hide the error segment
-  $(".tweet-error-section").hide();
-
-  const $errorMessage = $(".error-message");
-
-  // handling new tweet form submit
-  $("form").submit(function (event) {
-    // On click of submit button prevent page refreshing
-    event.preventDefault();
-    $(".tweet-error-section").slideUp();
-    const inputText = $("#tweet-text").val();
-
-    if (!inputText) {
-      $(".tweet-error").text("Tweet cannot be empty!");
-      $(".tweet-error-section").slideDown();
-      return;
-    }
-
-    //input characters cannot exceed 140
-    if (inputText.length > 140) {
-      $(".tweet-error").text("Tweet cannot exceed 140 characters!");
-      $(".tweet-error-section").slideDown();
-
-      $errorMessage.slideDown(300);
-      return;
-    }
-
-    
-    $.ajax({
-      method: "Post",
-      url: "/tweets",
-      type: "application/json",
-      data: { text: inputText },
-      success: function (data) {
-        // Create a new tweet element with the data returned from the server
-        const $tweet = loadTweets();
-
-        // Append the new tweet to the top of the tweet list
-        $("#tweet-section").prepend($tweet);
-
-        // Reset the form to clear the previously entered data and also set the word count to 140
-        $(event.target).trigger("reset");
-        $(event.target).find(".counter").text("140");
-      },
-      //If Error
-      error: function (err) {
-        console.error(err);
-      },
-    });
-  });
-  loadTweets();
-});
-
+// function for creation of tweets
 const renderTweets = function (tweets) {
   // loops through tweets (array of objects)
-  for (tweet of tweets) {
+  for (let tweet of tweets) {
     // calls createTweetElement for each tweet and append it to teetContainer and return it
     $("#tweet-section").prepend(createTweetElement(tweet));
   }
   return;
 };
 
+//Provides the article section to HTML with tweets.
 const createTweetElement = function (tweet) {
   const { user } = tweet;
   let $tweet = $(`
@@ -96,18 +43,79 @@ const createTweetElement = function (tweet) {
 
 // client-side JavaScript will use AJAX to fetch (GET) data from the server
 const loadTweets = function () {
-  $.ajax({
+  $.get({
     method: "Get",
-    url: "http://localhost:8080/tweets",
+    url: "/tweets",
     type: "application/json",
-    success: renderTweets,
+    success: function (data) {
+      $("#tweet-section").text("");
+      renderTweets(data);
+    },
     error: function (err) {
       console.error(err);
     },
   });
 };
+
+// This function will prevent hacking the system through tweets.
 const escape = function (str) {
   let div = document.createElement("div");
   div.appendChild(document.createTextNode(str));
   return div.innerHTML;
 };
+
+$(document).ready(() => {
+  //onload of the form hide the error segment
+  $(".tweet-error-section").hide();
+
+  // variable to store error msg.
+  const $errorMessage = $(".error-message");
+
+  // handling new tweet form submit
+  $("form").submit(function (event) {
+    // On click of submit button prevent page refreshing
+    event.preventDefault();
+
+    //hide the error msg if any
+    $(".tweet-error-section").slideUp();
+
+    const inputText = $("#tweet-text").val();
+
+    //empty check
+    if (!inputText) {
+      $(".tweet-error").text("Tweet cannot be empty!");
+      $(".tweet-error-section").slideDown();
+      return;
+    }
+
+    //input characters cannot exceed 140
+    if (inputText.length > 140) {
+      $(".tweet-error").text("Tweet cannot exceed 140 characters!");
+      $(".tweet-error-section").slideDown();
+
+      $errorMessage.slideDown(300);
+      return;
+    }
+
+    // New tweet addition starts
+    $.post({
+      method: "Post",
+      url: "/tweets",
+      type: "application/json",
+      data: { text: inputText },
+      success: function (data) {
+        // Create a new tweet element with the data returned from the server
+        const $tweet = loadTweets();
+
+        // Reset the form to clear the previously entered data and also set the word count to 140
+        $(event.target).trigger("reset");
+        $(event.target).find(".counter").text("140");
+      },
+      //If Error
+      error: function (err) {
+        console.error(err);
+      },
+    });
+  });
+  loadTweets();
+});

@@ -107,6 +107,11 @@ header {
   flex: 1;
 }
 
+.tweet-description {
+  word-wrap: break-word;
+}
+
+/* Desk top view */
 @media only screen and (min-width: 1023px) {
   .responsive {
     display: flex;
@@ -116,5 +121,8 @@ header {
     margin-top: 153px;
     padding: 0 5%;
     width: 60%;
+  }
+  nav {
+    background-color: #4056a1;
   }
 }
